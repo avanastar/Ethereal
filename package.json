@@ -29,7 +29,7 @@
         "@types/dotenv": "^8.2.3",
         "@typescript-eslint/eslint-plugin": "^6.21.0",
         "@typescript-eslint/parser": "^8.32.1",
-        "eslint": "^8.57.1",
+        "eslint": "^9.27.0",
         "eslint-config-prettier": "^10.1.5",
         "husky": "^8.0.3",
         "lint-staged": "^14.0.1",
