@@ -1,12 +1,11 @@
 import MessageCommand from '../templates/MessageCommand.js'
-import { default as config } from '../config.json' assert { type: 'json' }
-const { OWNER_ID } = process.env
+import { default as config } from '../config.json' with { type: 'json' }
 
 export default new MessageCommand({
     name: 'undeploy',
     description: 'Undeploys the slash commands',
     async execute(message, args): Promise<void> {
-        if (message.author.id !== OWNER_ID) return
+        if (message.author.id !== process.env.OWNER_ID) return
 
         if (!args[0]) {
             await message.reply(

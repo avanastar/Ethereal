@@ -8,21 +8,25 @@
         "prepare": "husky install",
         "lint": "eslint --cache --fix src",
         "prettier": "prettier --write src",
-        "compile": "tsc && npm run copy",
+        "compile": "tsc && bun run copy",
         "clean": "rimraf dist/",
-        "copy": "npx copyfiles -u 1 src/.env src/**/*.json dist/",
-        "build": "npm run lint && npm run prettier && npm run clean && npm run compile",
-        "start": "npx copyfiles -u 1 src/.env src/**/*.json dist/ && cd dist && node . && cd ..",
-        "dev": "npm run clean && tsc-watch --onSuccess \"npm run start\"",
-        "prod": "npm run build && npm run start"
+        "copy": "bunx copyfiles -u 1 src/.env src/**/*.json dist/",
+        "build": "bun run lint && bun run prettier && bun run clean && bun run compile",
+        "start": "bunx copyfiles -u 1 src/.env src/**/*.json dist/ && cd dist && bun . && cd ..",
+        "dev": "bun run clean && tsc-watch --onSuccess \"bun run start\"",
+        "prod": "bun run build && bun run start"
     },
     "dependencies": {
         "@discordjs/rest": "^2.5.0",
+        "bun": "^1.2.13",
+        "discord-api-types": "^0.38.8",
         "discord.js": "^14.19.3",
         "dotenv": "^16.5.0"
     },
     "devDependencies": {
         "@tsconfig/node20": "^20.1.5",
+        "@types/bun": "^1.2.13",
+        "@types/dotenv": "^8.2.3",
         "@typescript-eslint/eslint-plugin": "^6.21.0",
         "@typescript-eslint/parser": "^8.32.1",
         "eslint": "^8.57.1",
@@ -30,8 +34,8 @@
         "husky": "^8.0.3",
         "lint-staged": "^14.0.1",
         "prettier": "^3.5.3",
-        "typescript": "^5.8.3",
         "rimraf": "^5.0.10",
-        "tsc-watch": "^6.3.1"
+        "tsc-watch": "^6.3.1",
+        "typescript": "^5.8.3"
     }
 }

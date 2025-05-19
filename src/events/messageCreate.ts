@@ -1,7 +1,7 @@
 import type MessageCommand from '../templates/MessageCommand.js'
 import Event from '../templates/Event.js'
 import { Events, Message } from 'discord.js'
-import { default as config } from '../config.json' assert { type: 'json' }
+import { default as config } from '../config.json' with { type: 'json' }
 
 export default new Event({
     name: Events.MessageCreate,

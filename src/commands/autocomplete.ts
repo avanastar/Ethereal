@@ -19,7 +19,6 @@ export default new ApplicationCommand({
                 .setRequired(true)
         )
         .setDescription('Search a guide!'),
-
     async autocomplete(interaction) {
         const focusedOption = interaction.options.getFocused(true)
         let choices: string[] = []

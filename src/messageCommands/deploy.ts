@@ -4,19 +4,13 @@ import type ApplicationCommand from '../templates/ApplicationCommand.js'
 import MessageCommand from '../templates/MessageCommand.js'
 import { REST } from '@discordjs/rest'
 import { RESTPostAPIApplicationCommandsJSONBody, Routes } from 'discord.js'
-import { default as config } from '../config.json' assert { type: 'json' }
-
-const { TOKEN, CLIENT_ID, OWNER_ID } = process.env as {
-    TOKEN: string
-    CLIENT_ID: string
-    OWNER_ID: string
-}
+import { default as config } from '../config.json' with { type: 'json' }
 
 export default new MessageCommand({
     name: 'deploy',
     description: 'Deploys the slash commands',
     async execute(message, args): Promise<void> {
-        if (message.author.id !== OWNER_ID) return
+        if (message.author.id !== process.env.OWNER_ID) return
 
         if (!args[0]) {
             await message.reply({
@@ -43,14 +37,17 @@ export default new MessageCommand({
                 commands.push(commandData)
             }
 
-            const rest = new REST({ version: '10' }).setToken(TOKEN)
+            const rest = new REST({ version: '10' }).setToken(process.env.TOKEN)
 
             try {
                 console.log('Started refreshing application (/) commands.')
 
-                await rest.put(Routes.applicationCommands(CLIENT_ID), {
-                    body: commands
-                })
+                await rest.put(
+                    Routes.applicationCommands(process.env.CLIENT_ID),
+                    {
+                        body: commands
+                    }
+                )
 
                 console.log('Successfully reloaded application (/) commands.')
             } catch (error) {
@@ -74,14 +71,14 @@ export default new MessageCommand({
                 commands.push(commandData)
             }
 
-            const rest = new REST({ version: '10' }).setToken(TOKEN)
+            const rest = new REST({ version: '10' }).setToken(process.env.TOKEN)
 
             try {
                 console.log('Started refreshing application (/) commands.')
 
                 await rest.put(
                     Routes.applicationGuildCommands(
-                        CLIENT_ID,
+                        process.env.CLIENT_ID,
                         message.guild?.id as string
                     ),
                     {

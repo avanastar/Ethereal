@@ -1,13 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import 'dotenv/config'
-
-import { Client, GatewayIntentBits, Collection, Partials } from 'discord.js'
+import { Client, Collection, Partials, GatewayIntentBits } from 'discord.js'
 import { readdirSync } from 'fs'
 import type ApplicationCommand from './templates/ApplicationCommand.js'
 import type Event from './templates/Event.js'
 import type MessageCommand from './templates/MessageCommand.js'
 import deployGlobalCommands from './deployGlobalCommands.js'
-const { TOKEN } = process.env
+
+declare module 'bun' {
+    interface Env {
+        TOKEN: string
+        CLIENT_ID: string
+        GUILD_ID: string
+    }
+}
 
 await deployGlobalCommands()
 
@@ -55,10 +60,12 @@ const eventFiles: string[] = readdirSync('./events').filter(
 for (const file of eventFiles) {
     const event: Event = (await import(`./events/${file}`)).default as Event
     if (event.once) {
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
         client.once(event.name, (...args) => event.execute(...args))
     } else {
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
         client.on(event.name, (...args) => event.execute(...args))
     }
 }
 
-await client.login(TOKEN)
+await client.login(Bun.env.TOKEN)
