@@ -18,14 +18,14 @@
     },
     "dependencies": {
         "@discordjs/rest": "^2.5.0",
-        "bun": "^1.2.13",
+        "bun": "^1.2.16",
         "discord-api-types": "^0.38.12",
         "discord.js": "^14.19.3",
         "dotenv": "^16.5.0"
     },
     "devDependencies": {
         "@tsconfig/node20": "^20.1.6",
-        "@types/bun": "^1.2.13",
+        "@types/bun": "^1.2.16",
         "@types/dotenv": "^8.2.3",
         "@typescript-eslint/eslint-plugin": "^6.21.0",
         "@typescript-eslint/parser": "^8.32.1",
