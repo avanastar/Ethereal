@@ -28,7 +28,7 @@
         "@types/bun": "^1.2.16",
         "@types/dotenv": "^8.2.3",
         "@typescript-eslint/eslint-plugin": "^8.34.1",
-        "@typescript-eslint/parser": "^8.32.1",
+        "@typescript-eslint/parser": "^8.39.1",
         "eslint": "^9.29.0",
         "eslint-config-prettier": "^10.1.5",
         "husky": "^9.1.7",
